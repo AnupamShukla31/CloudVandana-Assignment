@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .profile-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .name {
+            font-size: 26px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .designation {
+            color: gray;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .bio {
+            font-size: 15px;
+            margin: 15px 0;
+            color: #555;
+            padding: 0 10px;
+        }
+
+        .social-icons {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            color: #3498db;
+            font-size: 28px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #8e44ad;
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 400px) {
+            .card {
+                padding: 20px;
+            }
+            .profile-img {
+                width: 110px;
+                height: 110px;
+            }
+            .name {
+                font-size: 22px;
+            }
+            .designation {
+                font-size: 16px;
+            }
+            .bio {
+                font-size: 14px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div class="card">
+        <img src="images/profile.png" alt="Profile Picture" class="profile-img">
+        <div class="name">Anupam Shukla</div>
+        <div class="designation"> Web Developer</div>
+        <div class="bio">Crafting elegant and functional digital experiences. Passionate about UI/UX & Frontend Development.</div>
+        <div class="social-icons">
+            <a href="https://www.linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+    </div>
+</body>
+</html>
