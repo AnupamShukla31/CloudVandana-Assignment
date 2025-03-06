@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        img { width: 500px; height: 300px; object-fit: cover; display: block; margin: auto; }
+        button { margin: 10px; padding: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>Image Slider</h2>
+    <img id="slider" src="" alt="Image Slider">
+    <br>
+    <button id="prevButton">Previous</button>
+    <button id="nextButton">Next</button>
+
+    <script>
+        const images = [
+            "images/image1.jpg",
+			"images/image2.jpg",
+			"images/image3.jpg",
+			"images/image4.jpg",
+			"images/image5.jpg"
+           
+        ];
+        
+        let currentIndex = 0;
+        const slider = document.getElementById("slider");
+        const prevButton = document.getElementById("prevButton");
+        const nextButton = document.getElementById("nextButton");
+        
+        function updateImage() {
+            slider.src = images[currentIndex];
+        }
+        
+        prevButton.addEventListener("click", function () {
+            currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
+            updateImage();
+        });
+        
+        nextButton.addEventListener("click", function () {
+            currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
+            updateImage();
+        });
+        
+        updateImage();
+    </script>
+</body>
+</html>
