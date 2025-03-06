@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple To-Do List</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        ul { list-style-type: none; padding: 0; }
+        li { 
+            margin: 10px 0; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: #f4f4f4; 
+            padding: 10px; 
+            border-radius: 5px; 
+        }
+        button { margin-left: 10px; cursor: pointer; }
+        .completed { text-decoration: line-through; color: gray; }
+        input[type="text"] { padding: 8px; width: 60%; }
+    </style>
+</head>
+<body>
+    <h2>To-Do List</h2>
+    <input type="text" id="taskInput" placeholder="Enter a task">
+    <button id="addTaskButton">Add Task</button>
+    <ul id="taskList"></ul>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const taskInput = document.getElementById("taskInput");
+            const addTaskButton = document.getElementById("addTaskButton");
+            const taskList = document.getElementById("taskList");
+
+            function saveTasks() {
+                const tasks = [];
+                document.querySelectorAll("li").forEach(li => {
+                    tasks.push({ text: li.firstChild.textContent, completed: li.classList.contains("completed") });
+                });
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+            }
+
+            function loadTasks() {
+                const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+                tasks.forEach(task => addTask(task.text, task.completed));
+            }
+
+            function addTask(taskText, completed = false) {
+                if (taskText.trim() === "") return;
+
+                const listItem = document.createElement("li");
+                listItem.textContent = taskText;
+                if (completed) listItem.classList.add("completed");
+
+                listItem.addEventListener("click", function () {
+                    listItem.classList.toggle("completed");
+                    saveTasks();
+                });
+
+                const removeButton = document.createElement("button");
+                removeButton.textContent = "Remove";
+                removeButton.addEventListener("click", function (event) {
+                    event.stopPropagation();
+                    taskList.removeChild(listItem);
+                    saveTasks();
+                });
+
+                listItem.appendChild(removeButton);
+                taskList.appendChild(listItem);
+                saveTasks();
+            }
+
+            addTaskButton.addEventListener("click", function () {
+                addTask(taskInput.value);
+                taskInput.value = "";
+            });
+
+            taskInput.addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    addTask(taskInput.value);
+                    taskInput.value = "";
+                }
+            });
+
+            loadTasks();
+        });
+    </script>
+</body>
+</html>
